@@ -1,9 +1,15 @@
 import cors from "cors";
 import express, { Express } from "express";
 import { prisma } from "./lib/prisma.js";
-import { SampleController } from "./modules/sample/sample.controller.js";
-import { SampleRouter } from "./modules/sample/sample.router.js";
-import { SampleService } from "./modules/sample/sample.service.js";
+import { AuthRouter } from "./modules/auth/auth.router.js";
+import { AuthController } from "./modules/auth/auth.controller.js";
+import { AuthService } from "./modules/auth/auth.service.js";
+import { EventRouter } from "./modules/event/event.router.js";
+import { EventController } from "./modules/event/event.controller.js";
+import { EventService } from "./modules/event/event.service.js";
+import { TransactionRouter } from "./modules/transaction/transaction.router.js";
+import { TransactionController } from "./modules/transaction/transaction.controller.js";
+import { TransactionService } from "./modules/transaction/transaction.service.js";
 import { globalError, notFoundError } from "./utils/errors.js";
 
 export class App {
@@ -23,16 +29,24 @@ export class App {
 
   private registerModules() {
     // services
-    const sampleService = new SampleService(prisma);
+    const authService = new AuthService(prisma);
+    const eventService = new EventService(prisma);
+    const transactionService = new TransactionService(prisma);
 
     // controllers
-    const sampleController = new SampleController(sampleService);
+    const authController = new AuthController(authService);
+    const eventController = new EventController(eventService);
+    const transactionController = new TransactionController(transactionService);
 
     // routes
-    const sampleRouter = new SampleRouter(sampleController);
+    const authRouter = new AuthRouter(authController);
+    const eventRouter = new EventRouter(eventController);
+    const transactionRouter = new TransactionRouter(transactionController);
 
     // entry point
-    this.app.use("/samples", sampleRouter.getRouter());
+    this.app.use("/auth", authRouter.getRouter());
+    this.app.use("/events", eventRouter.getRouter());
+    this.app.use("/transactions", transactionRouter.getRouter());
   }
 
   private errors() {
