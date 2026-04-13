@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -22,3 +23,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+=======
+node_modules
+dist
+/src/generated/prisma
+.env
+>>>>>>> 3abc2e666ae91f7f99661f0d97f4d63cba861b33
