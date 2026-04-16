@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import HeroCarousel from "../components/HeroCarousel";
 import { useDebounce } from "../hooks/useDebounce";
 import mockEvents from "../data/events.json";
+import { apiClient } from "../api/axiosClient";
 
 const CATEGORIES = ["Semua", "Technology", "Music", "Business", "Sports"];
 
@@ -47,26 +48,50 @@ export default function Home() {
   const { data, isLoading } = useQuery({
     queryKey: ["events", debouncedSearch, activeCategory, currentPage],
     queryFn: async () => {
-      // Simulasi delay jaringan
-      await new Promise(r => setTimeout(r, 400));
-      
-      let filtered = mockEvents as any[];
-      if (debouncedSearch) {
-        filtered = filtered.filter(e => e.title.toLowerCase().includes(debouncedSearch.toLowerCase()));
-      }
-      if (activeCategory !== "Semua") {
-        filtered = filtered.filter(e => e.category === activeCategory);
-      }
+      try {
+        const res = await apiClient.get('/events', {
+          params: {
+            search: debouncedSearch || undefined,
+            category: activeCategory !== "Semua" ? activeCategory : undefined
+          }
+        });
+        
+        // Inject image from mock data if title matches
+        let filtered = res.data.data.map((event: any) => {
+          const match = mockEvents.find(mock => mock.title === event.title);
+          if (match) event.imageUrl = match.imageUrl;
+          return event;
+        });
 
-      const totalItems = filtered.length;
-      const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-      const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+        const totalItems = filtered.length;
+        const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+        const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
-      return {
-        events: paginated,
-        totalItems,
-        totalPages
-      };
+        return {
+          events: paginated,
+          totalItems,
+          totalPages
+        };
+      } catch (err) {
+        console.warn("API load failed, falling back to mockEvents");
+        let filtered = mockEvents as any[];
+        if (debouncedSearch) {
+          filtered = filtered.filter(e => e.title.toLowerCase().includes(debouncedSearch.toLowerCase()));
+        }
+        if (activeCategory !== "Semua") {
+          filtered = filtered.filter(e => e.category === activeCategory);
+        }
+  
+        const totalItems = filtered.length;
+        const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+        const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+  
+        return {
+          events: paginated,
+          totalItems,
+          totalPages
+        };
+      }
     },
   });
 
