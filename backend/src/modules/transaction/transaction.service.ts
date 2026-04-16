@@ -134,4 +134,13 @@ export class TransactionService {
       orderBy: { createdAt: "desc" }
     });
   }
+
+  async getTransactionById(id: number, userId: number) {
+    const tx = await this.prisma.transaction.findUnique({
+      where: { id },
+      include: { event: true }
+    });
+    if (!tx || tx.userId !== userId) throw new ApiError("Transaction not found", 404);
+    return tx;
+  }
 }

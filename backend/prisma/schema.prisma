@@ -31,8 +31,12 @@ model User {
   avatarUrl      String?
   pointsBalance  Int       @default(0)
   referralCode   String    @unique
-  referredById   Int?
-  referredBy     User?     @relation("Referral", fields: [referredById], references: [id])
+  referredById           Int?
+  appLockPin             String?
+  twoFactorEnabled       Boolean   @default(false)
+  twoFactorCode          String?
+  twoFactorCodeExpiresAt DateTime?
+  referredBy             User?     @relation("Referral", fields: [referredById], references: [id])
   referrals      User[]    @relation("Referral")
 
   events         Event[]
