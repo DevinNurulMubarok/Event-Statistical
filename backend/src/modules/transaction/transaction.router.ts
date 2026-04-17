@@ -12,6 +12,7 @@ export class TransactionRouter {
 
   private initializeRoutes() {
     this.router.get("/my", authMiddleware, this.transactionController.getMyTransactions);
+    this.router.get("/:id", authMiddleware, this.transactionController.getById);
     this.router.post("/checkout", authMiddleware, this.transactionController.checkout);
     this.router.put("/:id/proof", authMiddleware, this.transactionController.uploadProof);
     this.router.put("/:id/status", authMiddleware, organizerMiddleware, this.transactionController.processTransaction);

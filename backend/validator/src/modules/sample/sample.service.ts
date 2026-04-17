@@ -1,4 +1,4 @@
-import { PrismaClient } from "../../../../src/generated/prisma/client.js";
+import { PrismaClient } from "../../../../src/generated/prisma/index.js";
 import { ApiError } from "../../utils/api-error.js";
 
 export class SampleService {

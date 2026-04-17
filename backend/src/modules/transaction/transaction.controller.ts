@@ -41,4 +41,13 @@ export class TransactionController {
       next(err);
     }
   };
+
+  getById = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const transaction = await this.transactionService.getTransactionById(Number(req.params.id), req.user.id);
+      res.status(200).json({ data: transaction });
+    } catch (err) {
+      next(err);
+    }
+  };
 }

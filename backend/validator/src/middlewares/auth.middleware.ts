@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { Role } from "../../../src/generated/prisma/enums.js";
+import { Role } from "../../../src/generated/prisma/index.js";
 import { ApiError } from "../utils/api-error.js"; 
 
 export class AuthMiddleware {

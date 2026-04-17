@@ -17,7 +17,7 @@ const FAQ_DATA = [
     items: [
       { q: "Bagaimana cara membeli tiket?", a: "Pilih event yang Anda inginkan, pilih jenis tiket, lalu selesaikan pembayaran melalui metode yang tersedia (transfer bank, e-wallet, atau kartu kredit)." },
       { q: "Apakah saya bisa membatalkan tiket?", a: "Kebijakan pembatalan tergantung pada penyelenggara event. Silakan cek detail event untuk informasi lebih lanjut mengenai kebijakan refund." },
-      { q: "Metode pembayaran apa saja yang tersedia?", a: "Kami mendukung transfer bank (BCA, Mandiri, BNI, BRI), e-wallet (GoPay, OVO, Dana), dan kartu kredit/debit (Visa, Mastercard)." },
+      { q: "Metode pembayaran apa saja yang tersedia?", a: "Kami mendukung transfer bank (BCA, Mandiri, BNI, BRI), e-wallet (GoPay, OVO, Dana, ShopeePay), dan kartu kredit/debit (Visa, Mastercard)." },
     ],
   },
   {

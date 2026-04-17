@@ -22,98 +22,98 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" style={{ background: "var(--bg)" }}>
       <Navbar />
       <div className="max-w-6xl mx-auto p-8 animate-fade-in flex flex-col md:flex-row gap-8">
         
-        <aside className="w-full md:w-64 glass-card p-4 flex flex-col gap-2 h-fit border-none">
-          <button className={`p-3 text-left rounded ${activeTab === "overview" ? "bg-[var(--primary-color)] text-white font-bold" : "hover:bg-gray-800"}`} onClick={() => setActiveTab("overview")}>Overview</button>
-          <button className={`p-3 text-left rounded ${activeTab === "events" ? "bg-[var(--primary-color)] text-white font-bold" : "hover:bg-gray-800"}`} onClick={() => setActiveTab("events")}>Manage Events</button>
-          <button className={`p-3 text-left rounded ${activeTab === "marketing" ? "bg-[var(--primary-color)] text-white font-bold" : "hover:bg-gray-800"}`} onClick={() => setActiveTab("marketing")}>Marketing & Promo</button>
-          <button className={`p-3 text-left rounded ${activeTab === "transactions" ? "bg-[var(--primary-color)] text-white font-bold" : "hover:bg-gray-800"}`} onClick={() => setActiveTab("transactions")}>Transactions</button>
+        <aside className="w-full md:w-64 card p-4 flex flex-col gap-2 h-fit">
+          <button className={`py-3 px-4 text-sm text-left rounded-lg transition-all ${activeTab === "overview" ? "bg-[var(--primary)] text-white font-bold shadow-md shadow-[var(--primary-light)]" : "text-[var(--text-secondary)] hover:bg-[var(--surface-2)] hover:text-[var(--primary)]"}`} onClick={() => setActiveTab("overview")}>Overview</button>
+          <button className={`py-3 px-4 text-sm text-left rounded-lg transition-all ${activeTab === "events" ? "bg-[var(--primary)] text-white font-bold shadow-md shadow-[var(--primary-light)]" : "text-[var(--text-secondary)] hover:bg-[var(--surface-2)] hover:text-[var(--primary)]"}`} onClick={() => setActiveTab("events")}>Manage Events</button>
+          <button className={`py-3 px-4 text-sm text-left rounded-lg transition-all ${activeTab === "marketing" ? "bg-[var(--primary)] text-white font-bold shadow-md shadow-[var(--primary-light)]" : "text-[var(--text-secondary)] hover:bg-[var(--surface-2)] hover:text-[var(--primary)]"}`} onClick={() => setActiveTab("marketing")}>Marketing & Promo</button>
+          <button className={`py-3 px-4 text-sm text-left rounded-lg transition-all ${activeTab === "transactions" ? "bg-[var(--primary)] text-white font-bold shadow-md shadow-[var(--primary-light)]" : "text-[var(--text-secondary)] hover:bg-[var(--surface-2)] hover:text-[var(--primary)]"}`} onClick={() => setActiveTab("transactions")}>Transactions</button>
         </aside>
 
         <main className="flex-1 flex flex-col gap-8">
           {activeTab === "overview" && (
-            <>
-              <h2 className="text-3xl font-bold">Dashboard Overview</h2>
+            <div className="animate-fade-in space-y-6">
+              <h2 className="text-3xl font-bold text-[var(--text-primary)]">Dashboard Overview</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="glass-card p-6 border-none">
-                  <p className="text-gray-400 text-sm">Total Revenue</p>
-                  <h3 className="text-2xl font-bold text-green-400">IDR 19.55M</h3>
+                <div className="card p-6">
+                  <p className="text-[var(--text-secondary)] text-sm mb-1">Total Revenue</p>
+                  <h3 className="text-2xl font-bold text-green-500">IDR 20.000.000</h3>
                 </div>
-                <div className="glass-card p-6 border-none">
-                  <p className="text-gray-400 text-sm">Active Events</p>
-                  <h3 className="text-2xl font-bold text-blue-400">12</h3>
+                <div className="card p-6">
+                  <p className="text-[var(--text-secondary)] text-sm mb-1">Active Events</p>
+                  <h3 className="text-2xl font-bold text-blue-500">50</h3>
                 </div>
-                <div className="glass-card p-6 border-none">
-                  <p className="text-gray-400 text-sm">Pending Transactions</p>
-                  <h3 className="text-2xl font-bold text-orange-400">5</h3>
+                <div className="card p-6">
+                  <p className="text-[var(--text-secondary)] text-sm mb-1">Pending Transactions</p>
+                  <h3 className="text-2xl font-bold text-orange-500">100</h3>
                 </div>
               </div>
 
               {/* Live Status Section */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="glass-card p-6 border-none flex items-center justify-between">
+                <div className="card p-6 flex items-center justify-between">
                   <div>
                     <p className="text-xs text-[var(--text-muted)] uppercase font-bold tracking-wider mb-1">Tiket Terjual Hari Ini</p>
-                    <h4 className="text-3xl font-black text-white">42</h4>
+                    <h4 className="text-3xl font-black text-[var(--text-primary)]">90</h4>
                   </div>
                   <div className="text-3xl animate-pulse">🔥</div>
                 </div>
-                <div className="glass-card p-6 border-none flex items-center justify-between">
+                <div className="card p-6 flex items-center justify-between">
                   <div>
                     <p className="text-xs text-[var(--text-muted)] uppercase font-bold tracking-wider mb-1">Kunjungan Halaman</p>
-                    <h4 className="text-3xl font-black text-white">1,204</h4>
+                    <h4 className="text-3xl font-black text-[var(--text-primary)]">5,890</h4>
                   </div>
-                  <div className="text-3xl" style={{ color: "var(--primary-light)" }}>👁️</div>
+                  <div className="text-3xl">👁️</div>
                 </div>
               </div>
 
-              <div className="glass-card p-6 border-none">
-                <h3 className="text-xl font-bold mb-4">Revenue Analytics</h3>
+              <div className="card p-6">
+                <h3 className="text-xl font-bold mb-4 text-[var(--text-primary)]">Revenue Analytics</h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <AreaChart data={data}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#30363d" />
-                    <XAxis dataKey="name" stroke="#8b949e" />
-                    <YAxis stroke="#8b949e" />
-                    <Tooltip contentStyle={{ backgroundColor: "#161b22", borderColor: "#30363d" }} />
-                    <Area type="monotone" dataKey="revenue" stroke="#2f81f7" fill="#2f81f7" fillOpacity={0.3} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                    <XAxis dataKey="name" stroke="var(--text-secondary)" />
+                    <YAxis stroke="var(--text-secondary)" />
+                    <Tooltip contentStyle={{ backgroundColor: "var(--surface)", borderColor: "var(--border)", color: "var(--text-primary)" }} />
+                    <Area type="monotone" dataKey="revenue" stroke="var(--primary)" fill="var(--primary)" fillOpacity={0.2} />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
-            </>
+            </div>
           )}
 
           {activeTab === "events" && (
-            <div className="glass-card p-6 border-none">
-              <h2 className="text-2xl font-bold mb-4">Create New Event</h2>
+            <div className="card p-6 animate-fade-in">
+              <h2 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">Create New Event</h2>
               <form className="flex flex-col gap-4 max-w-lg">
-                <input className="p-2 rounded bg-gray-800 border border-gray-600" placeholder="Event Title" />
-                <textarea className="p-2 rounded bg-gray-800 border border-gray-600" placeholder="Description" rows={4}></textarea>
+                <input className="input" placeholder="Event Title" />
+                <textarea className="input" placeholder="Description" rows={4}></textarea>
                 <div className="flex gap-4">
-                  <input type="number" className="p-2 rounded bg-gray-800 border border-gray-600 flex-1" placeholder="Price (IDR)" />
-                  <input type="number" className="p-2 rounded bg-gray-800 border border-gray-600 flex-1" placeholder="Seats" />
+                  <input type="number" className="input flex-1" placeholder="Price (IDR)" />
+                  <input type="number" className="input flex-1" placeholder="Seats" />
                 </div>
                 <div className="flex gap-4">
-                  <input type="date" className="p-2 text-gray-400 rounded bg-gray-800 border border-gray-600 flex-1" />
-                  <input type="date" className="p-2 text-gray-400 rounded bg-gray-800 border border-gray-600 flex-1" />
+                  <input type="date" className="input flex-1" />
+                  <input type="date" className="input flex-1" />
                 </div>
-                <button className="bg-[var(--primary-color)] text-white py-2 rounded font-bold hover:brightness-110 transition">Save Event</button>
+                <button className="btn btn-primary justify-center font-bold">Save Event</button>
               </form>
             </div>
           )}
 
           {activeTab === "marketing" && (
-            <div className="glass-card p-6 border-none">
+            <div className="card p-6 animate-fade-in">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold">Promo Code Management</h2>
+                <h2 className="text-2xl font-bold text-[var(--text-primary)]">Promo Code Management</h2>
                 <button className="btn btn-primary btn-sm">Create New Promo</button>
               </div>
               <div className="overflow-x-auto text-sm">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-gray-700">
+                    <tr className="border-b border-[var(--border)] text-[var(--text-secondary)]">
                       <th className="p-3">Code</th>
                       <th className="p-3">Discount</th>
                       <th className="p-3">Usage</th>
@@ -121,20 +121,20 @@ export default function Dashboard() {
                       <th className="p-3">Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr className="border-b border-gray-800 hover:bg-gray-800/50">
-                      <td className="p-3 font-mono font-bold text-yellow-500">EARLYBIRD20</td>
+                  <tbody className="text-[var(--text-primary)]">
+                    <tr className="border-b border-[var(--border)] hover:bg-[var(--surface-2)]">
+                      <td className="p-3 font-mono font-bold text-[var(--accent-yellow)]">EARLYBIRD20</td>
                       <td className="p-3">20%</td>
-                      <td className="p-3">45 / 50</td>
+                      <td className="p-3">100 / 150</td>
                       <td className="p-3"><span className="badge badge-success">Active</span></td>
-                      <td className="p-3"><button className="text-red-400 hover:underline">Deactivate</button></td>
+                      <td className="p-3"><button className="text-[var(--accent-orange)] hover:underline">Deactivate</button></td>
                     </tr>
-                    <tr className="border-b border-gray-800 hover:bg-gray-800/50">
-                      <td className="p-3 font-mono font-bold text-yellow-500">TECHSUMMIT50</td>
+                    <tr className="border-b border-[var(--border)] hover:bg-[var(--surface-2)]">
+                      <td className="p-3 font-mono font-bold text-[var(--accent-yellow)]">TECHSUMMIT50</td>
                       <td className="p-3">IDR 50k</td>
                       <td className="p-3">120 / Unlimited</td>
                       <td className="p-3"><span className="badge badge-success">Active</span></td>
-                      <td className="p-3"><button className="text-red-400 hover:underline">Deactivate</button></td>
+                      <td className="p-3"><button className="text-[var(--accent-orange)] hover:underline">Deactivate</button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -143,12 +143,12 @@ export default function Dashboard() {
           )}
 
           {activeTab === "transactions" && (
-            <div className="glass-card p-6 border-none">
-              <h2 className="text-2xl font-bold mb-4">Pending Transactions</h2>
+            <div className="card p-6 animate-fade-in">
+              <h2 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">Pending Transactions</h2>
               <div className="overflow-x-auto text-sm">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-gray-700">
+                    <tr className="border-b border-[var(--border)] text-[var(--text-secondary)]">
                       <th className="p-3">User</th>
                       <th className="p-3">Event</th>
                       <th className="p-3">Total</th>
@@ -156,15 +156,16 @@ export default function Dashboard() {
                       <th className="p-3">Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr className="border-b border-gray-800 hover:bg-gray-800/50">
-                      <td className="p-3">John Doe</td>
+                  <tbody className="text-[var(--text-primary)]">
+                    <tr className="border-b border-[var(--border)] hover:bg-[var(--surface-2)]">
+                      <td className="p-3 font-semibold">John Doe</td>
                       <td className="p-3">Tech Summit 2024</td>
-                      <td className="p-3">IDR 500k</td>
-                      <td className="p-3"><a href="#" className="text-blue-400 hover:underline">View Proof</a></td>
+                      <td className="p-3 font-bold">IDR 500k</td>
+                      <td className="p-3"><a href="#" className="text-[var(--primary)] hover:underline">View Proof</a></td>
                       <td className="p-3 flex gap-2">
-                        <button className="px-3 py-1 bg-green-600 rounded text-xs">Accept</button>
-                        <button className="px-3 py-1 bg-red-600 rounded text-xs">Reject</button>
+                        <button className="px-3 py-1 bg-green-100 text-green-700 font-bold rounded-lg hover:bg-green-200">Accept</button>
+                        <button className="px-3 py-1 bg-red-100 text-red-700 font-bold rounded-lg hover:bg-red-200">Reject</button>
+                        <button className="px-3 py-1 bg-blue-100 text-blue-700 font-bold rounded-lg hover:bg-blue-200">Detail</button>
                       </td>
                     </tr>
                   </tbody>

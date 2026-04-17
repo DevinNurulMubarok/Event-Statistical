@@ -8,7 +8,6 @@ import { useAuth } from "../store/useAuth";
 import type { Event } from "../types/event";
 
 import mockEvents from "../data/events.json";
-import CountdownTimer from "../components/CountdownTimer";
 import SocialShare from "../components/SocialShare";
 import ReviewsSection from "../components/ReviewsSection";
 import EventCard from "../components/EventCard";
@@ -29,13 +28,22 @@ export default function EventDetail() {
   const { data: event, isLoading } = useQuery<Event>({
     queryKey: ["event", id],
     queryFn: async () => {
-      const mockEvent = mockEvents.find(e => e.id.toString() === id);
-      if (mockEvent) {
-        return mockEvent as Event;
+      try {
+        const res = await apiClient.get(`/events/${id}`);
+        if (res.data.data) {
+          const fetchedEvent = res.data.data as Event;
+          const match = mockEvents.find(e => e.title === fetchedEvent.title);
+          if (match) (fetchedEvent as any).imageUrl = match.imageUrl;
+          return fetchedEvent;
+        }
+      } catch (err) {
+        console.warn("API event fetch failed, trying mock fallback", err);
       }
       
-      const res = await apiClient.get(`/events/${id}`);
-      return res.data.data as Event;
+      const mockEvent = mockEvents.find(e => e.id.toString() === id);
+      if (mockEvent) return mockEvent as Event;
+      
+      throw new Error("Event not found");
     }
   });
 
@@ -118,15 +126,9 @@ export default function EventDetail() {
                 </div>
               </div>
 
-              {/* Countdown and Share */}
-              <div className="flex flex-col md:flex-row gap-8 mb-6 p-4 bg-[var(--surface-2)] rounded-2xl border border-[var(--border)]">
-                <div className="flex-1">
-                  <CountdownTimer targetDate={event.startDate} />
-                </div>
-                <div className="w-px bg-[var(--border)] hidden md:block"></div>
-                <div className="flex-1">
-                  <SocialShare title={event.title} url={window.location.href} />
-                </div>
+              {/* Share */}
+              <div className="mb-6 p-4 bg-[var(--surface-2)] rounded-2xl border border-[var(--border)]">
+                <SocialShare title={event.title} url={window.location.href} />
               </div>
               {/* Seat Progress */}
               <div className="mb-4">
